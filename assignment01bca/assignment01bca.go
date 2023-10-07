@@ -38,7 +38,7 @@ func NewBlock(transaction string, nonce int, previousHash string) Block {
 		return Block{}
 	}
 
-	// ?
+	// block instance for holding parameters for trx, nonce & previousHash of previous block
 	block := Block{
 		Transaction:  transaction,
 		Nonce:        nonce,
