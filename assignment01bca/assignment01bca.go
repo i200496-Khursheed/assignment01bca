@@ -3,7 +3,7 @@
 // Section: SE-A
 // Assignment# 1
 
-// Inside package assignment01bca/blockchain.go
+// Inside package assignment01bca/assignment01bca.go
 package assignment01bca
 
 import (
