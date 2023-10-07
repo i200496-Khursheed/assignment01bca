@@ -9,7 +9,7 @@ import (
 	//a1 "assignment01bca/assignment01bca"
 	"fmt"
 
-	a1 "github.com/i200496-Khursheed/assignment01bca"
+	a1 "github.com/i200496-Khursheed/assignment01bca/assignment01bca"
 )
 
 func main() {
