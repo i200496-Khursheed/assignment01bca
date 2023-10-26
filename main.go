@@ -1,3 +1,7 @@
+// Name: Khursheed Alam Khan
+// Roll Number: 20i-0496
+// Section: SE-A
+// Assignment: 2
 package main
 
 import (
