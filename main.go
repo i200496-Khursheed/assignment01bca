@@ -1,41 +1,77 @@
-// Name: Khursheed Alam Khan
-// Roll: 20i-0496
-// Section: SE-A
-// Assignment# 1
-
 package main
 
 import (
-	//a1 "assignment01bca/assignment01bca"
+	"bufio"
 	"fmt"
+	"os"
 
-	a1 "github.com/i200496-Khursheed/assignment01bca/assignment01bca"
+	"github.com/i200496-Khursheed/assignment01bca/assignment01bca"
 )
 
 func main() {
-	// Add blocks
-	a1.NewBlock("Alice to Bob", 123, "000000000")
-	a1.NewBlock("Bob to Charlie", 456, a1.Blockchain[0].Hash)
-	a1.NewBlock("Charlie to Delta", 789, a1.Blockchain[1].Hash)
-	a1.NewBlock("Delta to Gamma", 101, a1.Blockchain[2].Hash)
+	scanner := bufio.NewScanner(os.Stdin)
 
-	// Display blocks
-	fmt.Println("Before changing a block's transaction:")
-	fmt.Println("")
-	a1.DisplayBlocks()
+	for {
+		fmt.Println("\nMenu:")
+		fmt.Println("1. Add a new transaction")
+		fmt.Println("2. Display blocks")
+		fmt.Println("3. Display transactions in a block")
+		fmt.Println("4. Verify blockchain")
+		fmt.Println("5. Change a transaction in a block")
+		fmt.Println("6. Exit")
+		fmt.Print("Enter your choice: ")
 
-	// Change the third block's transaction
-	a1.ChangeBlock(2, "Charlie to Khursheed")
+		var choice int
+		fmt.Scanln(&choice)
 
-	fmt.Println("-----------------------------------------")
+		switch choice {
+		case 1:
+			fmt.Print("Enter transaction: ")
+			scanner.Scan()
+			transaction := scanner.Text()
+			fmt.Print("Enter nonce: ")
+			var nonce int
+			fmt.Scanln(&nonce)
 
-	// Display blocks after changing a block's transaction
-	fmt.Println("\nAfter changing Block 2 transaction from 'Charlie to Delta' to 'Charlie to Khursheed':")
-	fmt.Println("")
-	a1.DisplayBlocks()
+			assignment01bca.AddTransactionToPool(transaction, nonce)
 
-	// Verify blockchain
-	isValid := a1.VerifyChain()
-	fmt.Printf("\nIs the blockchain valid? %t\n", isValid)
-	fmt.Println("")
+		case 2:
+			fmt.Println("Displaying blocks:")
+			assignment01bca.DisplayBlocks()
+		case 3:
+			fmt.Print("Enter block index to display transactions: ")
+			var index int
+			fmt.Scanln(&index)
+			assignment01bca.DisplayTransactionsInBlock(index)
+
+		case 4:
+			isValid := assignment01bca.VerifyChain()
+			fmt.Printf("Is the blockchain valid? %t\n", isValid)
+
+		case 5:
+			fmt.Print("Enter block index to change transaction: ")
+			var blockIndex int
+			fmt.Scanln(&blockIndex)
+
+			fmt.Print("Enter transaction index to change: ")
+			var transactionIndex int
+			fmt.Scanln(&transactionIndex)
+
+			fmt.Print("Enter new transaction data: ")
+			scanner.Scan()
+			newTransactionData := scanner.Text()
+
+			fmt.Print("Enter new nonce: ")
+			var newNonce int
+			fmt.Scanln(&newNonce)
+
+			assignment01bca.ChangeBlock(blockIndex, transactionIndex, newTransactionData, newNonce)
+
+		case 6:
+			fmt.Println("Exiting the program.")
+			return
+		default:
+			fmt.Println("Invalid choice. Please select a valid option.")
+		}
+	}
 }
